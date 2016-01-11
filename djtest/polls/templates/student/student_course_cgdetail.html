@@ -16,7 +16,7 @@
                 附件：<a style="color: #0e90d2;">{{ cg.cg_file.username }}</a><br>
             {% endif %}
                 内容：<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cg.cg_message }}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cg.cg_message }}<br><br><br><br>
             {% for rp in cgrp %}
                 <div class="panel panel-default">
 	                <div class="panel-header">{{ rp.cg_title }}</div>
@@ -26,7 +26,7 @@
                         {% elif rp.cg_type == 3 %}
                             {{ rp.cg_author.t_name }}({{ rp.cg_author.t_id }})&nbsp;{{ rp.cg_time }}<br>
                         {% endif %}
-                        <p>内容：{{ rp.cg_message }}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ rp.cg_message }}</p>
                         {% if rp.cg_file %}
                             <p>附件：{{ rp.cg_file.username }}</p>
                         {% endif %}

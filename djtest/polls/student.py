@@ -759,9 +759,9 @@ def courseCgDetail(request, course_id):
         cg.cg_author = Teacher.objects.get(t_id=cg.cg_author)
     cgrp = CourseGroup.objects.filter(cg_repycg=cg.id)
     for rp in cgrp:
-        if rp.cg_type == 0:
+        if rp.cg_type == 2:
             rp.cg_author = Student.objects.get(s_id=rp.cg_author)
-        elif rp.cg_type == 1:
+        elif rp.cg_type == 3:
             rp.cg_author = Teacher.objects.get(t_id=rp.cg_author)
 
     return render(request, 'student/student_course_cgdetail.html', {'cg': cg, 'course': course, 'cgrp': cgrp})
