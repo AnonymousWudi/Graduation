@@ -1,0 +1,82 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}修改信息{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">修改模块</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2>修改选课及讨论组信息</h2>
+            <div class="line"></div>
+            <h4>选课信息</h4>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">课程编号</th>
+                        <th class="col3">课程名称</th>
+                        <th class="col3">学院</th>
+                        <th class="col3">专业</th>
+                        <th class="col3">授课老师</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cou in sTc %}
+                        <tr>
+                            <td class="col3">{{ cou.c_id.c_id }}</td>
+                            <td class="col3">{{ cou.c_id.c_name }}</td>
+                            <td class="col3">{{ cou.c_id.c_academy.a_name }}</td>
+                            <td class="col3">{{ cou.c_id.c_major.m_name }}</td>
+                            <td class="col3">{{ cou.c_id.c_teacher.t_name }}</td>
+                            <td class="col3"><form action="/polls/manager/stuCou/delete/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ cou.s_id.s_id }}">
+                                <input type="hidden" name="course_id" value="{{ cou.c_id.c_id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="退课" />
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table>
+            <h4>讨论组信息</h4>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">讨论组名称</th>
+                        <th class="col3">课程名称</th>
+                        <th class="col3">负责老师</th>
+                        <th class="col3">人数</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gou in sTg %}
+                        <tr>
+                            <td class="col3">{{ gou.group.g_name }}</td>
+                            <td class="col3">{{ gou.group.g_course.c_name }}</td>
+                            <td class="col3">{{ gou.group.g_teacher.t_name }}</td>
+                            <td class="col3">{{ gou.group.g_number }}/{{ gou.group.g_total }}</td>
+                            {% if gou.type == 1 %}
+                            <td class="col3"><form action="/polls/manager/stuGro/del/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ gou.student.s_id }}">
+                                <input type="hidden" name="group_id" value="{{ gou.group.id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="退出该讨论组" />
+                            </form></td>
+                            {% elif gou.type == 0 %}
+                            <td class="col3"><form action="/polls/manager/stuGro/add/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ gou.student.s_id }}">
+                                <input type="hidden" name="group_id" value="{{ gou.group.id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="加入该讨论组" />
+                            </form></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table>
+            <br>
+            <button class="btn btn-primary radius" onclick="javascript:history.back()" >返回</button>
+        </div>
+    </div>
+{% endblock %}

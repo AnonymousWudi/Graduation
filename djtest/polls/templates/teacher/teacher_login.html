@@ -1,0 +1,22 @@
+{% extends "base/base.html"%}
+
+{% block role %}
+    <li id="Huinav_1"> <a href="/polls/student/">学生入口</a> </li>
+    <li class="current" id="Huinav_2"> <a href="/polls/teacher/">老师入口</a> </li>
+{% endblock %}
+
+{% block tag %}
+    <h2>教师登录</h2>
+{% endblock %}
+
+{% block code %}教师编号：{% endblock %}
+
+{% block tips %}请输入你的教师编号{% endblock %}
+
+{% block null %}教师编号不能为空{% endblock %}
+
+{{ url }}
+
+{{ id }}
+
+{{ pwd }}

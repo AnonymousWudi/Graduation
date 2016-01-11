@@ -1,0 +1,58 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">交流学习</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">讨论区</h2>
+            <button class="btn btn-primary radius" href="#myModal" data-toggle="modal">发新贴</button>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">话题</th>
+                        <th class="col3">作者</th>
+                        <th class="col3">日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cg in courseGroup %}
+                        <tr>
+                            <td><a style="color: #0e90d2;" href="/polls/student/{{ course.c_id }}/cgDetail/?gid={{ cg.id }}">{{ cg.cg_title }}</a>({{ cg.cg_replynumber }}回帖)</td>
+                        {% if cg.cg_type == 0 %}
+                            <td>{{ cg.cg_author.s_name }}({{ cg.cg_author.s_id }})</td>
+                        {% elif cg.cg_type == 1 %}
+                            <td>{{ cg.cg_author.t_name }}({{ cg.cg_author.t_id }})</td>
+                        {% endif %}
+                            <td>{{ cg.cg_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- 弹出框代码 -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <h3>发新帖</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true">×</a> </div>
+            <div class="modal-body">
+                <form id="submitForm" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <p><label for="id_cg_title">标题：</label>
+                        <input class="input-text radius" id="id_cg_title" maxlength="50" name="cg_title" type="text" /></p>
+                    <p><label for="id_cg_message">内容：</label>
+                        <textarea cols="40" class="textarea radius" id="id_cg_message" maxlength="140" name="cg_message" rows="10"></textarea></p>
+                    <p><label for="id_cg_file">附件：</label>
+                        <input id="id_cg_file" name="cg_file" type="file" /></p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn radius btn-primary" onclick="document.getElementById('submitForm').submit();">确定</button>
+                <button class="btn radius" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+{% endblock %}

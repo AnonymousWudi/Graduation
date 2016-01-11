@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- 引入css文件 -->
+    <link href="/static/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/bootstrap-Switch/bootstrapSwitch.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/managercss.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/H-ui.doc.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/iconfont.css" rel="stylesheet" type="text/css" />
+
+    <link href="/static/css/laypage.css" rel="stylesheet" type="text/css" />
+
+    <!-- 引入js文件 -->
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/layer/1.9.3/layer.js"></script>
+    <script type="text/javascript" src="/static/lib/laypage.js"></script>
+    <script type="text/javascript" src="/static/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="/static/lib/icheck/jquery.icheck.min.js"></script>
+    <script type="text/javascript" src="/static/lib/bootstrap-Switch/bootstrapSwitch.js"></script>
+    <script type="text/javascript" src="/static/lib/Validform/5.3.2/Validform.min.js"></script>
+    <script type="text/javascript" src="/static/lib/Validform/5.3.2/passwordStrength-min.js"></script>
+
+    <script type="text/javascript" src="/static/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/pretty.js"></script>
+    <script type="text/javascript" src="/static/js/H-ui.js"></script>
+    <script>
+        $(function(){
+	        $('.skin-minimal input').iCheck({
+		        checkboxClass: 'icheckbox-blue',
+		        radioClass: 'iradio-blue',
+		        increaseArea: '20%'
+    	    });
+	        $("#demoform").Validform({
+		        tiptype:2
+	        });
+        });
+    </script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="Hui-header cl">
+        <a href="/polls/student/index/" class="Hui-logo f-l" title="教学平台管理系统">教学平台管理系统</a>
+        <span class="Hui-subtitle f-l">只为 &middot; 更好服务</span>
+        <nav id="Hui-nav" class="mainnav cl">
+            <ul>
+                <li id="Huinav_1"> <a href="/polls/student/index/">首页</a> </li>
+                <li id="Huinav_2"> <a href="/polls/student/index/">联系我们</a> </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 左边目录栏 -->
+    <aside class="Hui-aside">
+        <input runat="server" id="divScrollValue" type="hidden" value="" />
+        <div class="menu_dropdown bk_2">
+            <ul>
+                <li><a href="/polls/student/index/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;主页</strong></a></li>
+            </ul>
+            <dl id="menu_notes">
+            <dt>&nbsp;&nbsp;&nbsp;&nbsp;<strong>课程</strong><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="/polls/student/course/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;全部课程</strong></a></li>
+                    <li><a href="/polls/student/mycourse/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;我的课程</strong></a></li>
+                    <li><a href="/polls/student/schedule/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;课程表</strong></a></li>
+                </ul>
+            </dd>
+            </dl>
+            <dl id="menu_notes">
+            <dt>&nbsp;&nbsp;&nbsp;&nbsp;<strong>个人</strong><i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a href="/polls/student/myself/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;个人资料</strong></a></li>
+                    <li><a href="/polls/student/information/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;我的消息</strong></a></li>
+                </ul>
+            </dd>
+            </dl>
+            <ul>
+                <li><a href="/polls/student/quit/">&nbsp;&nbsp;&nbsp;&nbsp;退出登录</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+
+    <!-- 正文内容 -->
+    <section class="Hui-article-box">
+        {% block main %}{% endblock %}
+    </section>
+
+</body>
+</html>

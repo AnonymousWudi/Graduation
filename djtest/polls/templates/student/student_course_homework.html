@@ -1,0 +1,38 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">交流学习</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">作业</h2>
+            <table class="table table-border table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-c">作业标题</th>
+                        <th class="text-c">状态</th>
+                        <th class="text-c">开始</th>
+                        <th class="text-c">截止</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hw in homework %}
+                    <tr>
+                        <td class="text-c"><a style="color: #2683BC;" href="/polls/student/{{ course.c_id }}/hwDetail/?hw_id={{ hw.homework.id }}">{{ hw.homework.hw_title }}</a></td>
+                        <td class="text-c">
+                            {% if hw.type == 1 %}
+                                尚未提交
+                            {% elif hw.type == 0 %}
+                                已经提交
+                            {% endif %}
+                        </td>
+                        <td class="text-c">{{ hw.homework.hw_starttime }}</td>
+                        <td class="text-c">{{ hw.homework.hw_deadline }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}操作结果{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">主页</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            {% if status == 0 %}
+                <h2 class="page_title">操作成功</h2>
+            {% elif status == 1 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>你已经选过这门课程</strong></p>
+            {% elif status == 2 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>你没有选过这门课程</strong></p>
+            {% elif status == 3 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>你已经加入该讨论组，不能重复加入</strong></p>
+            {% elif status == 4 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>你还未加入该讨论组</strong></p>
+            {% elif status == 5 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>该讨论组人数已满，无法加入</strong></p>
+            {% elif status == 6 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>你还在该课程的讨论组中，请先退出讨论组</strong></p>
+            {% elif status == 7 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>加入该讨论组之前你需要先选择该门课程</strong></p>
+            {% elif status == 8 %}
+                <h2 class="page_title">操作失败</h2>
+                <p><strong>该课程人数已满，无法加入</strong></p>
+            {% elif status == 9 %}
+                <h2 class="page_title">操作成功</h2>
+                <p><strong>申请已发出，等待老师回复中</strong></p>
+                <button onclick="window.location.href='/polls/student/information/'"></button>
+            {% elif status == 10 %}
+                <h2 class="page_title">发送失败</h2>
+                <p><strong>收信人不存在</strong></p>
+                <a class="btn btn-primary radius" href="javascript:history.go(-1);">返回</a>
+            {% elif status == 11 %}
+                <h2 class="page_title">发送成功</h2>
+                <p><strong>私信已发出</strong></p>
+                <a class="btn btn-primary radius" href="/polls/student/group/">返回</a>
+            {% elif status == 12 %}
+                <h2 class="page_title">错误</h2>
+                <p><strong>没有该页数</strong></p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

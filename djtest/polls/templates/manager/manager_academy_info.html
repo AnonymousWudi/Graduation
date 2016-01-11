@@ -1,0 +1,58 @@
+{% extends 'manager/manager_base.html' %}
+
+{% block title %}教学平台管理系统{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">学生信息</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">学院信息</h2>
+            <p><strong>学院名：</strong>{{ academy.a_name }}</p>
+            <p><strong>学院编号：</strong>{{ academy.a_name }}</p>
+            <p><strong>学院老师：</strong></p>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">姓名</th>
+                        <th class="col3">教师编号</th>
+                        <th class="col3">邮箱</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tea in teacher %}
+                        <tr>
+                            <td class="col3">{{ tea.t_name }}</td>
+                            <td class="col3">{{ tea.t_id }}</td>
+                            <td class="col3">{{ tea.t_mail }}</td>
+                            <td class="col3"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table><br>
+            <p><strong>学院课程：</strong></p>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">课程名称</th>
+                        <th class="col3">专业</th>
+                        <th class="col3">任课教师</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cou in course %}
+                        <tr>
+                            <td class="col3">{{ cou.c_name }}</td>
+                            <td class="col3">{{ cou.c_major.m_name }}</td>
+                            <td class="col3">{{ cou.c_teacher.t_name }}</td>
+                            <td class="col3"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table><br>
+            <a class="btn btn-primary radius" href="javascript:history.back()">返回</a>
+        </div>
+        <br>
+    </div>
+{% endblock %}

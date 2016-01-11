@@ -1,0 +1,15 @@
+{% extends "teacher/teacher_base.html" %}
+
+{% block title %}欢迎登录教学平台{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/teacher/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">主页</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">主页</h2>
+            <p><strong>姓名：</strong>{{ teacher.t_name }}</p>
+            <p><strong>教师编号：</strong>{{ teacher.t_id }}</p>
+            <p><strong>邮箱：</strong>{{ teacher.t_mail }}</p>
+        </div>
+    </div>
+{% endblock %}

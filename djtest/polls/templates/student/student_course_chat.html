@@ -1,0 +1,27 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">交流学习</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">聊天室</h2>
+            {% for c in chat %}
+                {% if c.ch_type == '0' %}
+                    <p><strong>{{ c.ch_person.s_name }}</strong>({{ c.ch_time }}): {{ c.ch_message }}</p>
+                {% elif c.ch_type == '1' %}
+                    <p><strong>{{ c.ch_person.t_name }}</strong>({{ c.ch_time }}): {{ c.ch_message }}</p>
+                {% endif %}
+            {% endfor %}
+            <div style="position: absolute; bottom: 10px; left: 20px;">
+                <form method="post">
+                    {% csrf_token %}
+                    <p>输入聊天信息</p>
+                    <textarea class="textarea radius" cols="50" name="chat_message"></textarea>
+                    <input class="btn btn-primary radius" style="margin-top: 10px;" type="submit" value="提交" />
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

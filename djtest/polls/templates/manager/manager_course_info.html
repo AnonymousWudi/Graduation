@@ -1,0 +1,65 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}教学平台管理系统{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">课程信息</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">课程信息</h2>
+            <p><strong>名称：</strong>{{ course.c_name }}</p>
+            <p><strong>编号：</strong>{{ course.c_id }}</p>
+            <p><strong>学院：</strong>{{ course.c_academy.a_name }}</p>
+            <p><strong>授课教师：</strong>{{ course.c_teacher.t_name }}</p>
+            <p><strong>课程讨论组：</strong>{{ group.g_name }}</p>
+            <p><strong>课程日历：</strong></p>
+            <table class="table table-border table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-c"></th>
+                        <th class="text-c">星期一</th>
+                        <th class="text-c">星期二</th>
+                        <th class="text-c">星期三</th>
+                        <th class="text-c">星期四</th>
+                        <th class="text-c">星期五</th>
+                        <th class="text-c">星期六</th>
+                        <th class="text-c">星期日</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sch in schedule %}
+                        {% if sch.type == 1 %}
+                            <tr><th class="text-c">{{ sch.status }}</th>
+                        {% elif sch.type == 2 %}
+                            <td class="text-c">
+                                {{ sch.course.ci_id.c_name }}
+                            </td></tr>
+                        {% elif sch.type == 3 %}
+                            <td></td></tr>
+                        {% elif sch.type == 4 %}
+                            <td class="text-c">
+                                {{ sch.course.ci_id.c_name }}<br>
+                                {{ sch.course.ci_id.c_teacher.t_name }}<br>
+                                {{ sch.course.ci_module }}节&nbsp;
+                                {% if sch.course.ci_type == 0 %}
+                                    单双周
+                                {% elif sch.course.ci_type == 1 %}
+                                    单周
+                                {% elif sch.course.ci_type == 2 %}
+                                    双周
+                                {% endif %}
+                                <br>
+                                {{ sch.course.ci_classroom }}
+                            </td>
+                        {% elif sch.type == 5%}
+                            <td></td>
+                        {% endif %} 
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <a class="btn btn-primary radius" href="/polls/manager/course/modify/?cid={{ course.c_id }}">修改信息</a>
+        </div>
+        <br>
+    </div>
+{% endblock %}

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- 引入css文件 -->
+    <link href="/static/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/bootstrap-Switch/bootstrapSwitch.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/managercss.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/H-ui.doc.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/iconfont.css" rel="stylesheet" type="text/css" />
+
+    <!-- 引入js文件 -->
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/layer/1.9.3/layer.js"></script>
+    <script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+    <script type="text/javascript" src="/static/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="/static/lib/icheck/jquery.icheck.min.js"></script>
+    <script type="text/javascript" src="/static/lib/bootstrap-Switch/bootstrapSwitch.js"></script>
+    <script type="text/javascript" src="/static/lib/Validform/5.3.2/Validform.min.js"></script>
+    <script type="text/javascript" src="/static/lib/Validform/5.3.2/passwordStrength-min.js"></script>
+
+    <script type="text/javascript" src="/static/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/prettify.js"></script>
+    <script type="text/javascript" src="/static/js/H-ui.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-modalmanager.js"></script>
+
+    <script type="text/javascript" src="/static/js/airCity.js"></script>
+    <script type="text/javascript" src="/static/js/dimensions.js"></script>
+    <script type="text/javascript" src="/static/js/suggest.js"></script>
+    <script type="text/javascript">
+    /*调用插件*/
+    $(function(){
+        $("#arrcity").suggest(citys,{hot_list:commoncitys,dataContainer:'#arrcity_3word',onSelect:function(){$("#city2").click();},attachObject:'#suggest'});
+        $("#city2").suggest(citys,{hot_list:commoncitys,attachObject:"#suggest2"});
+    });
+    </script>
+
+    <script>
+        $(function(){
+	        $('.skin-minimal input').iCheck({
+		        checkboxClass: 'icheckbox-blue',
+		        radioClass: 'iradio-blue',
+		        increaseArea: '20%'
+    	    });
+	        $("#demoform").Validform({
+		        tiptype:2
+	        });
+        });
+    </script>
+    <style type="text/css">
+        #suggest {width:200px; left: 94px !important; top: 157px !important;}
+        #suggest2 {width:200px; left: 335px !important; top: 157px !important;}
+        .gray {color:gray;}
+        .ac_results {background:#fff;border:1px solid #7f9db9;position: absolute;z-index: 10000;display: none;}
+        .ac_results li a {white-space: nowrap;text-decoration:none;display:block;color:#05a;padding:1px 3px;}
+        .ac_results li {border:1px solid #fff;}
+        .ac_over, .ac_results li a:hover {background:#c8e3fc;}
+        .ac_results li a span {float:right;}
+        .ac_result_tip {border-bottom:1px dashed #666;padding:3px;}
+    </style>
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="Hui-header cl">
+        <a href="/polls/manager/index/" class="Hui-logo f-l" title="教学平台管理系统">教学平台管理系统</a>
+        <span class="Hui-subtitle f-l">只为 &middot; 更好服务</span>
+    </header>
+
+    <!-- 正文内容 -->
+    <section class="Hui-container">
+        <div class="Hui-wraper">
+            <h2>添加教师</h2>
+            <div class="line"></div>
+            <form action="/polls/teacher/register/submit/" method="post" class="form form-horizontal responsive" id="demoform">
+                {% csrf_token %}
+                <div class="row cl">
+                    <label class="form-label col-2">教师编号：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" placeholder="请输入教师编号" name="teacher_id" id="teacher_id" datatype="*1-10" nullmsg="教师编号不能为空">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">教师姓名：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" autocomplete="off" placeholder="请输入教师名" name="teacher_name"  datatype="*1-20" id="teacher_name" nullmsg="教师名不能为空">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">密码：</label>
+                    <div class="formControls col-5">
+                        <input type="password" class="input-text radius" autocomplete="off" placeholder="密码" name="password" id="password" datatype="*6-18" nullmsg="请输入密码！" >
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">密码验证：</label>
+                    <div class="formControls col-5">
+                        <input type="password" class="input-text radius" autocomplete="off" placeholder="密码" name="password2" id="password2" recheck="password" datatype="*6-18" nullmsg="请再输入一次密码！" errormsg="您两次输入的密码不一致！" >
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">邮箱：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" placeholder="@" name="teacher_mail" id="teacher_email" datatype="e" nullmsg="请输入邮箱！">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">学院：</label>
+                    <div class="formControls col-5"> <span class="select-box">
+                        <select class="select" size="1" name="teacher_academy" datatype="*" nullmsg="请选择学院！">
+                            <option value="" selected>请选择学院</option>
+                            {% for aca in academy %}
+                            <option value="{{ aca.a_id }}">{{ aca.a_name }}</option>
+                            {% endfor %}
+                        </select>
+                        </span> </div>
+                    <div class="col-5"> </div>
+			    </div>
+                <div class="row cl">
+                    <div class="col-10 col-offset-2">
+                        <a class="btn btn-primary radius" href="/polls/teacher/index/">返回</a>
+                        <input class="btn btn-primary radius" type="submit" value="提交">
+                    </div>
+			    </div>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

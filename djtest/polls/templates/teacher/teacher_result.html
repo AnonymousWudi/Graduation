@@ -1,0 +1,36 @@
+{% extends 'teacher/teacher_base.html' %}
+
+{% block title %}操作结果{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/teacher/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">操作结果</span></nav>
+        <div class="Hui-article">
+            <article class="cl pd-20">
+                {% if status == 1 %}
+                    <h2 class="page_title">操作成功</h2>
+                    <p>已回复</p>
+                {% elif status == 0 %}
+                    <h2 class="page_title">操作成功</h2>
+                {% elif status == 2 %}
+                    <h2 class="page_title">操作成功</h2>
+                    <p>{{ student.s_name }}已被踢出{{ group.g_name }}讨论组</p>
+                    <form action="/polls/teacher/groupInfo/" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="group_id" value="{{ group.g_course.c_id }}" />
+                        <input type="submit" class="btn btn-primary radius" value="返回" />
+                    </form>
+                {% elif status == 3 %}
+                    <h2 class="page_title">发送成功</h2>
+                    <p>你可以去看看</p><button class="btn btn-primary radius" onclick="window.location.href='/polls/teacher/information/'" />我的消息</button>
+                {% elif status == 4 %}
+                    <h2 class="page_title">发送失败</h2>
+                    <p>收信人不存在</p>
+                    <a class="btn btn-primary radius" href="javascript:history.back()">返回</a>
+                {% elif status == 5 %}
+                    <h2 class="page_title">发送成功</h2>
+                    <p>消息已发出</p>
+                    <a class="btn btn-primary radius" href="/polls/teacher/information/">返回</a>
+                {% endif %}
+            </article>
+        </div>
+{% endblock %}

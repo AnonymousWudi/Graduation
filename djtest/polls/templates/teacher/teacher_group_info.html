@@ -1,0 +1,103 @@
+{% extends 'teacher/teacher_base.html' %}
+
+{% block title %}讨论组信息{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/teacher/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">讨论组</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">讨论组信息</h2>
+            <p><strong>讨论组名称：</strong>{{ group.g_name }}</p>
+            <p><strong>课程名称：</strong>{{ group.g_course.c_name }}</p>
+            <p><strong>学院：</strong>{{ group.g_course.c_academy.a_name }}</p>
+            <p><strong>专业：</strong>{{ group.g_course.c_major.m_name }}</p>
+            <p><strong>讨论组人数：</strong>{{ group.g_number }}/{{ group.g_total }}</p>
+            <p><strong>讨论组成员：</strong></p>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">姓名</th>
+                        <th class="col3">学号</th>
+                        <th class="col3">学院</th>
+                        <th class="col3">专业</th>
+                        <th class="col3">班级</th>
+                        <th class="col3">年级</th>
+                        <th class="col3">邮箱</th>
+                        <th class="col3">操作</th>
+                        <th class="col3">踢出讨论组</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stu in sTg %}
+                        <tr>
+                            <td class="col3">{{ stu.s_id.s_name }}</td>
+                            <td class="col3">{{ stu.s_id.s_id }}</td>
+                            <td class="col3">{{ stu.s_id.s_academy.a_name }}</td>
+                            <td class="col3">{{ stu.s_id.s_major.m_name }}</td>
+                            <td class="col3">{{ stu.s_id.s_class }}</td>
+                            <td class="col3">{{ stu.s_id.s_grade }}</td>
+                            <td class="col3">{{ stu.s_id.s_mail }}</td>
+                            <td class="col3">
+                                <a class="btn btn-primary radius" href="/polls/teacher/sendmsg/?s={{ stu.s_id.s_id }}">发送私信</a>
+                            </td>
+                            <td class="col3"><form action="/polls/teacher/deleteStu/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ stu.s_id.s_id }}"/>
+                                <input type="hidden" name="group_id" value="{{ stu.g_id.g_course.c_id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="踢出讨论组"/>
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table><br>
+            <a class="btn btn-primary radius" href="#myModal" data-toggle="modal">发送通知</a>
+            <a class="btn btn-primary radius" href="#myModalSecond" data-toggle="modal">布置作业</a>
+            <button class="btn btn-primary radius">解散讨论组</button>
+        </div>
+        <!-- 弹出层代码 广播 -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <h3>发送通知</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true" href="javascript:void();">×</a> </div>
+            <div class="modal-body">
+                <form action="/polls/teacher/broadcast/" method="post" id="submitForm">
+                    {% csrf_token %}
+                    <div class="row cl">
+                        <label class="form-label col-3">发件人：</label>
+                        <div class="formControls col-5">
+                            <input type="hidden" name="information_from" value="{{ group.g_teacher.t_id }}" />
+                            <p>{{ group.g_teacher.t_name }}</p>
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-3">收件人：</label>
+                        <div class="formControls col-5">
+                            <input type="hidden" name="information_to" value="{{ group.id }}" />
+                            <p>{{ group.g_name }}讨论组全体成员</p>
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-3">主题：</label>
+                        <div class="formControls col-5">
+                            <input type="text" class="input-text radius" name="information_title" />
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-3">内容：</label>
+                        <div class="formControls col-5">
+                            <textarea cols rows class="textarea radius" name="information_message"></textarea>
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn radius btn-primary" onclick="document.getElementById('submitForm').submit();">确定</button>
+                <button class="btn radius" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

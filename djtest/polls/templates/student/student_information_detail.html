@@ -1,0 +1,27 @@
+{% extends 'student/student_base.html' %}
+
+{% block title %}{{ information.i_title }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">收件箱</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">{{ information.i_title }}</h2>
+            <p><strong>发件人：</strong>{{ info_from }}</p>
+            <p><strong>时&nbsp;&nbsp;&nbsp;间：</strong>{{ information.i_time }}</p>
+            <p><strong>收件人：</strong>{{ info_to }}</p>
+            <p><strong>内&nbsp;&nbsp;&nbsp;容：</strong></p>
+            &nbsp;&nbsp;&nbsp;&nbsp;{{ information.i_message }}<br><br>
+            {% if information.i_type == 2 or information.i_type == 5 %}
+                <button class="btn btn-primary radius" onclick="window.location.href='/polls/student/information/'">返回</button>
+            {% elif information.i_type == 4 %}
+                <a class="btn btn-primary radius" href="/polls/student/sendmsg/?t={{ information.i_from }}">回复</a>
+                <a class="btn btn-primary radius" href="javascript:history.back()">返回</a>
+            {% elif information.i_type == 6 %}
+                <a class="btn btn-primary radius" href="/polls/student/sendmsg/?s={{ information.i_from }}">回复</a>
+                <a class="btn btn-primary radius" href="javascript:history.back()">返回</a>
+            {% endif %}
+        </div>
+        <br>
+    </div>
+{% endblock %}

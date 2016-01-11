@@ -1,0 +1,26 @@
+{% extends 'teacher/teacher_base.html' %}
+
+{% block title %}{{ information.i_title }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/teacher/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">收件箱</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">{{ information.i_title }}</h2>
+            <p><strong>发件人：</strong>{{ info_from }}</p>
+            <p><strong>时&nbsp;&nbsp;&nbsp;间：</strong>{{ information.i_time }}</p>
+            <p><strong>收件人：</strong>{{ info_to }}</p>
+            <p><strong>内&nbsp;&nbsp;&nbsp;容：</strong></p>
+            &nbsp;&nbsp;&nbsp;&nbsp;{{ information.i_message }}<br><br>
+            {% if information.i_type == 1 and not information.i_status %}
+                <button class="btn btn-primary radius" onclick="window.location.href='/polls/teacher/infoResponse/?value=1&&id={{ information.i_id }}'" >同意</button>&nbsp;&nbsp;
+                <button class="btn btn-primary radius" onclick="window.location.href='/polls/teacher/infoResponse/?value=2&&id={{ information.i_id }}'" >拒绝</button>
+            {% elif information.i_type == 1 and information.i_status %}
+                <button class="btn btn-primary radius" onclick="window.location.href='/polls/teacher/information/'" >返回</button>
+            {% else %}
+                <a class="btn btn-primary radius" href="/polls/teacher/sendmsg/?s={{ information.i_from }}">回复</a>
+                <button class="btn btn-primary radius" onclick="window.location.href='/polls/teacher/information/'" >返回</button>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

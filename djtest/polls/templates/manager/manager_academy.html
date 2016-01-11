@@ -1,0 +1,37 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}学院管理{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">管理模块</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2>学院管理</h2>
+		    <div class="line"></div>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">学院编号</th>
+                        <th class="col3">学院名</th>
+                        <th class="col3">详情</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aca in academy %}
+                        <tr>
+                            <th class="col3">{{ aca.a_id }}</th>
+                            <td class="col3">{{ aca.a_name }}</td>
+                            <td class="col3"><a class="btn btn-primary radius" href="/polls/manager/academyInfo/?aid={{ aca.a_id }}">详情</a></td>
+                            <td class="col3"><form action="/polls/manager/academy/delete/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="academy_id" value="{{ aca.a_id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="删除学院" />
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table>
+        </div>
+    </div>
+{% endblock %}

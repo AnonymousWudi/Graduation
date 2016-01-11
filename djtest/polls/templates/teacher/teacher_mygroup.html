@@ -1,0 +1,135 @@
+{% extends "teacher/teacher_base.html" %}
+
+{% block title %}我的讨论组{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/teacher/index">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">课程</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">我的讨论组</h2>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">讨论组名称</th>
+                        <th class="col3">课程名称</th>
+                        <th class="col3">学院</th>
+                        <th class="col3">专业</th>
+                        <th class="col3">讨论组人数</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for gou in group %}
+                        <tr>
+                            <th class="col3">{{ gou.g_name }}</th>
+                            <th class="col3">{{ gou.g_course.c_name }}</th>
+                            <td class="col3">{{ gou.g_course.c_academy.a_name }}</td>
+                            <td class="col3">{{ gou.g_course.c_major.m_name }}</td>
+                            <td class="col3">{{ gou.g_number }}/{{ gou.g_total }}</td>
+                            <td class="col3"><form action="/polls/teacher/groupInfo/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="group_id" value="{{ gou.g_course.c_id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="详细信息"/>
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table>
+            <div id="page1" style="margin-top: 10px; text-align: center;">
+                <div name="laypage1.3" class="laypage_main laypageskin_default" id="laypage-14">
+                    {% if page.type == 0 %}
+                        <span class="laypage_curr">1</span>
+                    {% elif page.type == 1 %}
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <a class="laypage_next" href="/polls/student/information/?page={{ page.nextpage }}">下一页</a>
+                    {% elif page.type == 2 %}
+                        <a class="laypage_prev" href="/polls/student/information/?page={{ page.previouspage }}">上一页</a>
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% elif page.type == 3 %}
+                        <a class="laypage_prev" href="/polls/student/information/?page={{ page.previouspage }}">上一页</a>
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <a class="laypage_next" href="/polls/student/information/?page={{ page.nextpage }}">下一页</a>
+                    {% elif page.type == 4 %}
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <span>...</span>
+                        <a class="laypage_last" href="/polls/student/information/?page={{ page.total }}">{{ page.total }}</a>
+                        <a class="laypage_next" href="/polls/student/information/?page={{ page.nextpage }}">下一页</a>
+                    {% elif page.type == 5 %}
+                        <a class="laypage_prev" href="/polls/student/information/?page={{ page.previouspage }}">上一页</a>
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <span>...</span>
+                        <a class="laypage_last" href="/polls/student/information/?page={{ page.total }}">{{ page.total }}</a>
+                        <a class="laypage_next" href="/polls/student/information/?page={{ page.nextpage }}">下一页</a>
+                    {% elif page.type == 6 %}
+                        <a class="laypage_prev" href="/polls/student/information/?page={{ page.previouspage }}">上一页</a>
+                        <a class="laypage_last" href="/polls/student/information/?page=1">1</a>
+                        <span>...</span>
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% elif page.type == 7 %}
+                        <a class="laypage_prev" href="/polls/student/information/?page={{ page.previouspage }}">上一页</a>
+                        <a class="laypage_last" href="/polls/student/information/?page=1">1</a>
+                        <span>...</span>
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <a class="laypage_next" href="/polls/student/information/?page={{ page.nextpage }}">下一页</a>
+                    {% elif page.type == 8 %}
+                        <a class="laypage_prev" href="/polls/student/information/?page={{ page.previouspage }}">上一页</a>
+                        <a class="laypage_last" href="/polls/student/information/?page=1">1</a>
+                        <span>...</span>
+                        {% for i in page.fivepage %}
+                            {% if page.current == i %}
+                                <span class="laypage_curr">{{ i }}</span>
+                            {% else %}
+                                <a href="/polls/student/information/?page={{ i }}">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        <span>...</span>
+                        <a class="laypage_last" href="/polls/student/information/?page={{ page.total }}">{{ page.total }}</a>
+                        <a class="laypage_next" href="/polls/student/information/?page={{ page.nextpage }}">下一页</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

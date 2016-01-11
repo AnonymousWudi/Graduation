@@ -1,0 +1,29 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}教学平台管理系统{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">教师信息</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">教师信息</h2>
+            <p><strong>教师姓名：</strong>{{ teacher.t_name }}</p>
+            <p><strong>教师编号：</strong>{{ teacher.t_id }}</p>
+            <p><strong>学院：</strong>{{ teacher.t_academy.a_name }}</p>
+            <p><strong>邮箱：</strong>{{ teacher.t_mail }}</p>
+            <p><strong>密码：</strong>{{ teacher.t_pwd }}</p>
+            <p><strong>所教课程：</strong></p>
+            {% for cou in course %}
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cou.c_name }}</p>
+            {% endfor %}
+            <p><strong>所建立讨论组</strong></p>
+            {% for gou in group %}
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ gou.g_name }}（{{ gou.g_course.c_name }}）</p>
+            {% endfor %}
+            <br>
+            <a class="btn btn-primary radius" href="javascript:history.back()">返回</a>
+            <a class="btn btn-primary radius" href="/polls/manager/teacher/modify/?tid={{ teacher.t_id }}">修改信息</a>
+            <a class="btn btn-primary radius" href="/polls/manager/teacher/modCaG/?tid={{ teacher.t_id }}">修改选课及讨论组信息</a>
+        </div>
+    </div>
+{% endblock %}

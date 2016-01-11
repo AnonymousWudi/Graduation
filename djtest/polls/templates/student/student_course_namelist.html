@@ -1,0 +1,34 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">课程信息</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">花名册</h2>
+
+
+            <table class="table table-border table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-c">姓名</th>
+                        <th class="text-c">学号</th>
+                        <th class="text-c">email</th>
+                        <th class="text-c">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in sTc %}
+                    <tr>
+                        <td class="text-c"><a href="/polls/student/course/student/?sid={{ s.s_id.s_id }}">{{ s.s_id.s_name }}</a></td>
+                        <td class="text-c">{{ s.s_id.s_id }}</td>
+                        <td class="text-c">{{ s.s_id.s_mail }}</td>
+                        <td class="text-c"><a class="btn btn-primary radius" href="#">发送私信</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

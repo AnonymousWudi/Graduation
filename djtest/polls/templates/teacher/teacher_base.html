@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- 引入css文件 -->
+    <link href="/static/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/bootstrap-Switch/bootstrapSwitch.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/Hui-iconfont/1.0.6/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/managercss.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/H-ui.doc.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/iconfont.css" rel="stylesheet" type="text/css" />
+
+    <!-- 引入js文件 -->
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/layer/1.9.3/layer.js"></script>
+    <script type="text/javascript" src="/static/lib/laypage/1.2/laypage.js"></script>
+    <script type="text/javascript" src="/static/lib/My97DatePicker/WdatePicker.js"></script>
+    <script type="text/javascript" src="/static/lib/icheck/jquery.icheck.min.js"></script>
+    <script type="text/javascript" src="/static/lib/bootstrap-Switch/bootstrapSwitch.js"></script>
+    <script type="text/javascript" src="/static/lib/Validform/5.3.2/Validform.min.js"></script>
+    <script type="text/javascript" src="/static/lib/Validform/5.3.2/passwordStrength-min.js"></script>
+
+    <script type="text/javascript" src="/static/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="/static/js/common.js"></script>
+    <script type="text/javascript" src="/static/js/pretty.js"></script>
+    <script type="text/javascript" src="/static/js/H-ui.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-modalmanager.js"></script>
+
+    <script>
+        $(function(){
+	        $('.skin-minimal input').iCheck({
+		        checkboxClass: 'icheckbox-blue',
+		        radioClass: 'iradio-blue',
+		        increaseArea: '20%'
+    	    });
+	        $("#demoform").Validform({
+		        tiptype:2
+	        });
+        });
+    </script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body scroll="auto">
+    <!-- 导航栏 -->
+    <header class="Hui-header cl">
+        <a href="/polls/teacher/index/" class="Hui-logo f-l" title="教学平台管理系统">教学平台管理系统</a>
+        <span class="Hui-subtitle f-l">只为 &middot; 更好服务</span>
+        <nav id="Hui-nav" class="mainnav cl">
+            <ul>
+                <li id="Huinav_1"> <a href="/polls/teacher/index/">首页</a> </li>
+                <li id="Huinav_2"> <a href="/polls/teacher/index/">联系我们</a> </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 左边目录栏 -->
+    <aside class="Hui-aside">
+        <input runat="server" id="divScrollValue" type="hidden" value="" />
+        <div class="menu_dropdown bk_2">
+            <ul>
+                <li><a href="/polls/teacher/index/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;主页</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/polls/teacher/mycourse/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;我的课程</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/polls/teacher/information/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;我的消息</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/polls/teacher/mygroup/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;我的讨论组</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/polls/teacher/sendmsg/"><strong>&nbsp;&nbsp;&nbsp;&nbsp;发送消息</strong></a></li>
+            </ul>
+            <ul>
+                <li><a href="/polls/teacher/quit/">&nbsp;&nbsp;&nbsp;&nbsp;退出登录</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- 正文内容 -->
+    <section class="Hui-article-box">
+        {% block main %}{% endblock %}
+    </section>
+
+</body>
+</html>

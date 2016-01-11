@@ -1,0 +1,41 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">交流学习</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">提问</h2>
+            <form action="/polls/student/{{ course.c_id }}/msgsubmit/" method="post" class="form form-horizontal responsive" id="demoform">
+                {% csrf_token %}
+                <div class="row cl">
+                    <label class="form-label col-2" style="margin-top: 0px;">收件人：</label>
+                    <div class="formControls col-5">
+                        {{ course.c_teacher.t_name }}
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2" style="margin-top: 0px;">主题：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" name="msg_title" />
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2" style="margin-top: 0px;">内容：</label>
+                    <div class="formControls col-5">
+                        <textarea class="textarea radius" cols="40" rows="10" name="msg_message"></textarea>
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-10 col-offset-2">
+                        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    </div>
+			    </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'manager/manager_base.html' %}
+
+{% block title %}操作结果{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">操作结果</span></nav>
+        <div class="Hui-article">
+            <article class="cl pd-20">
+                {% if status == 1 %}
+                    <h2 class="page_title">添加失败</h2>
+                    <p><strong>失败原因：</strong>数据库中已有该条数据</p>
+                {% elif status == 2 %}
+                    <h2 class="page_title">删除失败</h2>
+                    <p><strong>失败原因：</strong>有相关数据未删除，请先删除相关数据</p>
+                    <button class="btn btn-primary radius" onclick="history.go(-1)" >返回</button>
+                {% elif status == 3 %}
+                    <h2 class="page_title">删除失败</h2>
+                    <p><strong>失败原因：</strong>该数据不存在，无法删除</p>
+                    <button class="btn btn-primary radius" onclick="history.go(-1)">返回</button>
+                {% elif status == 4 %}
+                    <h2 class="page_title">操作成功</h2>
+                    <a class="btn btn-primary radius" href="http://127.0.0.1:8000/polls/manager/student/modCaG/?sid={{ student_id }}">返回</a>
+                {% elif status == 0 %}
+                    <h2 class="page_title">操作成功</h2>
+                {% elif status == -1 %}
+                    <h2 class="page_title">error</h2>
+                {% elif status == 5 %}
+                    <h2 class="page_title">操作失败</h2>
+                    <p><strong>错误原因：</strong>讨论组已满，无法加入</p>
+                {% elif status == 6 %}
+                    <h2 class="page_title">操作成功</h2>
+                    <p>{{ student.s_name }}同学成功加入{{ group.g_name }}讨论组</p>
+                    <a class="btn btn-primary radius" href="/polls/manager/student/modCaG/?sid={{ student.s_id }}">返回</a>
+                {% elif status == 7 %}
+                    <h2 class="page_title">操作失败</h2>
+                    <p><strong>错误原因：</strong>讨论组中没有这个学生</p>
+                {% elif status == 8 %}
+                    <h2 class="page_title">操作成功</h2>
+                    <p>{{ student.s_name }}同学已被移出{{ group.g_name }}讨论组</p>
+                    <a class="btn btn-primary radius" href="/polls/manager/student/modCaG/?sid={{ student.s_id }}">返回</a>
+                {% endif %}
+            </article>
+        </div>
+{% endblock %}

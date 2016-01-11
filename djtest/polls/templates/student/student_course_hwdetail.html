@@ -1,0 +1,32 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">交流学习</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">作业详情</h2>
+            <div class="row cl"><label class="form-label col-1">标题：</label>{{ homework.hw_title }}</div>
+            <div class="row cl"><label class="form-label col-1">开始日期：</label>{{ homework.hw_starttime }}</div>
+            <div class="row cl"><label class="form-label col-1">截止日期：</label>{{ homework.hw_deadline }}</div>
+            <div class="row cl"><label class="form-label col-1">状态：</label>
+                {% if homework.hw_status == 1 %}
+                    正在进行
+                {% elif homework.hw_status == 0 %}
+                    已经结束
+                {% endif %}
+            </div>
+            <div class="row cl"><label class="form-label col-1">评分方式：</label>分数(满分{{ homework.hw_score }})</div>
+            <div class="row cl"><label class="form-label col-1">附件：</label><a style="color: #0e90d2;">{{ homework.hw_file.username }}</a></div>
+            <div class="row cl"><label class="form-label col-1">作业详情：</label><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ homework.hw_message }}</div><br>
+            {% if myhw %}
+                已交过作业<button class="btn btn-primary radius">重新交作业</button>
+            {% else %}
+                <button class="btn btn-primary radius">交作业</button>
+            {% endif %}
+            <a class="btn btn-primary radius" href="/polls/student/{{ course.c_id }}/homework/">返回</a>
+        </div>
+    </div>
+{% endblock %}

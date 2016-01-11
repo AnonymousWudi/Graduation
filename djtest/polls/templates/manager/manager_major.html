@@ -1,0 +1,37 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}专业管理{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">管理模块</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2>专业管理</h2>
+		    <div class="line"></div>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">专业编号</th>
+                        <th class="col3">专业名</th>
+                        <th class="col3">学院名</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for maj in major %}
+                        <tr>
+                            <th class="col3">{{ maj.m_id }}</th>
+                            <td class="col3">{{ maj.m_name }}</td>
+                            <td class="clo3">{{ maj.m_academy.a_name }}</td>
+                            <td class="col3"><form action="/polls/manager/major/delete/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="major_id" value="{{ maj.m_id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="删除专业" />
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}添加课程{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">添加模块</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2>添加课程</h2>
+            <div class="line"></div>
+            <form action="/polls/manager/course/submit/" method="post" class="form form-horizontal responsive" id="demoform">
+                {% csrf_token %}
+                <div class="row cl">
+                    <label class="form-label col-2">课程编号：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" placeholder="请输入课程编号" name="course_id" id="course_id" datatype="*1-10" nullmsg="课程编号不能为空">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">课程名称：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" autocomplete="off" placeholder="请输入课程名称" name="course_name"  datatype="*1-20" id="course_name" nullmsg="课程名不能为空">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">学院：</label>
+                    <div class="formControls col-5"> <span class="select-box">
+                        <select class="select" size="1" name="course_academy" datatype="*" nullmsg="请选择学院！">
+                            <option value="" selected>请选择学院</option>
+                            {% for aca in academy %}
+                            <option value="{{ aca.a_id }}">{{ aca.a_name }}</option>
+                            {% endfor %}
+                        </select>
+                        </span> </div>
+                    <div class="col-5"> </div>
+			    </div>
+                <div class="row cl">
+                    <label class="form-label col-2">专业：</label>
+                    <div class="formControls col-5"> <span class="select-box">
+                        <select class="select" size="1" name="course_major" datatype="*" nullmsg="请选择专业！">
+                            <option value="" selected>请选择专业</option>
+                            {% for maj in major %}
+                            <option value="{{ maj.m_id }}">{{ maj.m_name }}</option>
+                            {% endfor %}
+                        </select>
+                        </span> </div>
+                    <div class="col-5"> </div>
+			    </div>
+                <div class="row cl">
+                    <label class="form-label col-2">授课教师：</label>
+                    <div class="formControls col-5"> <span class="select-box">
+                        <select class="select" size="1" name="course_teacher" datatype="*" nullmsg="请选择教师！">
+                            <option value="" selected>请选择教师</option>
+                            {% for teac in teacher %}
+                            <option value="{{ teac.t_id }}">{{ teac.t_name }}</option>
+                            {% endfor %}
+                        </select>
+                        </span> </div>
+                    <div class="col-5"> </div>
+			    </div>
+                <div class="row cl">
+                    <div class="col-10 col-offset-2">
+                        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    </div>
+			    </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

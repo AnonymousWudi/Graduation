@@ -1,0 +1,48 @@
+.manager_title{
+	height:40px;
+	background-color:#00008B;
+}
+
+.title_left{
+	text-align:left;
+	padding:0px 0px 0px 30px;
+	margin:0px;
+	line-height:40px;   
+	overflow:hidden;
+}
+
+.title_left font{
+	color: white;
+	font-family: 微软雅黑;
+}
+
+.manager_left{
+	width:260px;
+	height:300px;
+}
+
+.manager_left .inner{
+	margin-top:20px;
+}
+
+.manager_left .inner ul{
+	
+}
+
+.manager_left .inner ul li{
+	list-style-type:none;
+	margin:0px 0px 10px 50px;
+}
+
+.manager_left .inner ul .inner_li{
+	margin-left:35px;
+}
+
+.manager_left .inner ul .inner_li font{
+	color:#878787;
+	font-family: 微软雅黑;
+}
+
+.HuifoldParent{
+	width:250px;
+}

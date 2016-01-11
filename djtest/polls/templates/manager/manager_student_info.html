@@ -1,0 +1,31 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}教学平台管理系统{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">学生信息</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">学生信息</h2>
+            <p><strong>姓名：</strong>{{ student.s_name }}</p>
+            <p><strong>学号：</strong>{{ student.s_id }}</p>
+            <p><strong>年级：</strong>{{ student.s_grade }}</p>
+            <p><strong>学院：</strong>{{ student.s_academy.a_name }}</p>
+            <p><strong>专业：</strong>{{ student.s_major.m_name }}</p>
+            <p><strong>班级：</strong>{{ student.s_class }}</p>
+            <p><strong>邮箱：</strong>{{ student.s_mail }}</p>
+            <p><strong>密码：</strong>{{ student.s_pwd }}</p>
+            <p><strong>已选课程：</strong></p>
+            {% for cou in course %}
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cou.c_id.c_name }}</p>
+            {% endfor %}
+            <p><strong>已加入讨论组：</strong></p>
+            {% for g in group %}
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ g.g_id.g_name }}(&nbsp;{{ g.g_id.g_course.c_name }}&nbsp;)</p>
+            {% endfor %}
+            <button class="btn btn-primary radius" onclick="javascript:history.back()" >返回</button>
+            <a class="btn btn-primary radius" href="/polls/manager/student/modify/?sid={{ student.s_id }}">修改信息</a>
+            <a class="btn btn-primary radius" href="/polls/manager/student/modCaG/?sid={{ student.s_id }}">修改选课及讨论组信息</a>
+        </div>
+    </div>
+{% endblock %}

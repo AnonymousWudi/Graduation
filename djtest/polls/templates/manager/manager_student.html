@@ -1,0 +1,47 @@
+{% extends 'manager/manager_base.html' %}
+
+{% block title %}学生管理{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">管理模块</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2>学生管理</h2>
+		    <div class="line"></div>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">学号</th>
+                        <th class="col3">姓名</th>
+                        <th class="col3">年级</th>
+                        <th class="col3">学院</th>
+                        <th class="col3">专业</th>
+                        <th class="col2">班级</th>
+                        <th class="col3">邮箱</th>
+                        <th class="col3">密码</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stu in student %}
+                        <tr>
+                            <td class="col3">{{ stu.s_id }}</td>
+                            <td class="col3">{{ stu.s_name }}</td>
+                            <td class="col3">{{ stu.s_grade }}</td>
+                            <td class="col3">{{ stu.s_academy.a_name }}</td>
+                            <td class="col3">{{ stu.s_major.m_name }}</td>
+                            <td class="col3">{{ stu.s_class }}</td>
+                            <td class="col3">{{ stu.s_mail }}</td>
+                            <td class="col3">{{ stu.s_pwd }}</td>
+                            <td class="col3"><form action="/polls/manager/student/info/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="student_id" value="{{ stu.s_id }}" />
+                                <input type="submit" class="btn btn-primary radius" value="详细信息" />
+                            </form></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+		    </table>
+        </div>
+    </div>
+{% endblock %}

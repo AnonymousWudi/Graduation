@@ -1,0 +1,64 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">交流学习</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">{{ cg.cg_title }}</h2>
+            {% if cg.cg_type == 0 %}
+                {{ cg.cg_author.s_name }}({{ cg.cg_author.s_id }})&nbsp;{{ cg.cg_time }}<br>
+            {% elif cg.cg_type == 1 %}
+                {{ cg.cg_author.t_name }}({{ cg.cg_author.t_id }})&nbsp;{{ cg.cg_time }}<br>
+            {% endif %}
+            {% if cg.cg_file %}
+                附件：<a style="color: #0e90d2;">{{ cg.cg_file.username }}</a><br>
+            {% endif %}
+                内容：<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ cg.cg_message }}<br>
+            {% for rp in cgrp %}
+                <div class="panel panel-default">
+	                <div class="panel-header">{{ rp.cg_title }}</div>
+	                <div class="panel-body">
+                        {% if rp.cg_type == 2 %}
+                            {{ rp.cg_author.s_name }}({{ rp.cg_author.s_id }})&nbsp;{{ rp.cg_time }}<br>
+                        {% elif rp.cg_type == 3 %}
+                            {{ rp.cg_author.t_name }}({{ rp.cg_author.t_id }})&nbsp;{{ rp.cg_time }}<br>
+                        {% endif %}
+                        <p>内容：{{ rp.cg_message }}</p>
+                        {% if rp.cg_file %}
+                            <p>附件：{{ rp.cg_file.username }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+            <div style="position: absolute; bottom: 0; margin-bottom: 10px;">
+                <button class="btn btn-primary radius" href="#myModal" data-toggle="modal">回复</button>
+                <a class="btn btn-primary radius" href="/polls/student/{{ course.c_id }}/group/">返回</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 弹出框代码 -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <h3>回复</h3>
+                <a class="close" data-dismiss="modal" aria-hidden="true">×</a> </div>
+            <div class="modal-body">
+                <form id="submitForm" enctype="multipart/form-data" method="POST">
+                    {% csrf_token %}
+                    <p><label for="id_cg_title">标题：</label>
+                        <input class="input-text radius" id="id_cg_title" maxlength="50" name="cg_title" type="text" value="回复：{{ cg.cg_title }}" /></p>
+                    <p><label for="id_cg_message">内容：</label>
+                        <textarea cols="40" class="textarea radius" id="id_cg_message" maxlength="140" name="cg_message" rows="10"></textarea></p>
+                    <p><label for="id_cg_file">附件：</label>
+                        <input id="id_cg_file" name="cg_file" type="file" /></p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn radius btn-primary" onclick="document.getElementById('submitForm').submit();">确定</button>
+                <button class="btn radius" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+{% endblock %}

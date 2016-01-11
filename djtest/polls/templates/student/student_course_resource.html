@@ -1,0 +1,30 @@
+{% extends 'student/student_base_1.html' %}
+
+{% block title %}{{ course.c_name }}{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">课程资源</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">资源</h2>
+            <table class="table table-border table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-c">标题</th>
+                        <th class="text-c">创建者</th>
+                        <th class="text-c">创建时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for u in ur %}
+                    <tr>
+                        <td class="text-c">{{ u.headImg }}</td>
+                        <td class="text-c">{{ u.uploadperson.t_name }}</td>
+                        <td class="text-c">{{ u.time }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

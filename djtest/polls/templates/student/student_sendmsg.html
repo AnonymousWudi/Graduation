@@ -1,0 +1,54 @@
+{% extends "student/student_base.html" %}
+
+{% block title %}发送私信{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">添加模块</span></nav>
+        <div class="Hui-article">
+            <div class="Hui-wraper">
+                <h2>发送私信</h2>
+                <div class="line"></div>
+                <form action="/polls/student/sendmsg/submit/" method="post" class="form form-horizontal responsive" id="demoform">
+                {% csrf_token %}
+                    <div class="row cl">
+                        <label class="form-label col-2" style="margin-top: 0px;">收信人：</label>
+                        <div class="formControls col-5">
+                            {% if status == 1 %}
+                                {{ teacher.t_name }}
+                                <input type="hidden" name="information_to" value="{{ teacher.t_id }}" />
+                                <input type="hidden" name="information_type" value="7">
+                            {% elif status == 2 %}
+                                {{ student.s_name }}
+                                <input type="hidden" name="information_to" value="{{ student.s_id }}" />
+                                <input type="hidden" name="information_type" value="6">
+                            {% elif status == 3 %}
+                                <input type="text" class="input-text radius" placeholder="请输入收信人的id" name="information_to" />
+                                <input type="hidden" name="information_type" value="0">
+                            {% endif %}
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-2">主题：</label>
+                        <div class="formControls col-5">
+                            <input type="text" class="input-text radius" placeholder="请输入主题" name="information_title" id="information_title">
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                    <div class="row cl">
+                        <label class="form-label col-2">正文：</label>
+                        <div class="formControls col-5">
+                            <textarea cols rows class="textarea radius" placeholder="请输入正文" name="information_message"></textarea>
+                        </div>
+                        <div class="col-5"> </div>
+                    </div>
+                    <div class="row cl">
+                        <div class="col-10 col-offset-2">
+                            <input class="btn btn-primary radius" type="submit" value="发送">
+                            <input class="btn btn-primary radius" type="button" name="back" value="返回" onclick="javascript:history.back()">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+{% endblock %}

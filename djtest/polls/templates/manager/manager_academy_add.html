@@ -1,0 +1,35 @@
+{% extends "manager/manager_base.html" %}
+
+{% block title %}添加学院{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/manager/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">添加模块</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2>添加学院</h2>
+            <div class="line"></div>
+            <form action="/polls/manager/academy/submit/" method="post" class="form form-horizontal responsive" id="demoform">
+                {% csrf_token %}
+                <div class="row cl">
+                    <label class="form-label col-2">学院编号：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" placeholder="请输入学院编号" name="academy_id" id="academy_id" datatype="*1-10" nullmsg="学院编号不能为空">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <label class="form-label col-2">学院名：</label>
+                    <div class="formControls col-5">
+                        <input type="text" class="input-text radius" autocomplete="off" placeholder="请输入学院名" name="academy_name"  datatype="*1-20" id="academy_name" nullmsg="学院名不能为空">
+                    </div>
+                    <div class="col-5"> </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-10 col-offset-2">
+                        <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                    </div>
+			    </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

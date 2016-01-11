@@ -1,0 +1,52 @@
+{% extends 'student/student_base.html' %}
+
+{% block title %}讨论组信息{% endblock %}
+
+{% block main %}
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> <a class="maincolor" href="/polls/student/index/">首页</a> <span class="c-999 en">&gt;</span><span class="c-666">讨论组</span></nav>
+    <div class="Hui-article">
+        <div class="Hui-wraper">
+            <h2 class="page_title">讨论组信息</h2>
+            <p><strong>讨论组名称：</strong>{{ group.g_name }}</p>
+            <p><strong>课程名称：</strong>{{ group.g_course.c_name }}</p>
+            <p><strong>学院：</strong>{{ group.g_course.c_academy.a_name }}</p>
+            <p><strong>专业：</strong>{{ group.g_course.c_major.m_name }}</p>
+            <p><strong>负责老师：</strong>{{ group.g_teacher.t_name }}</p>
+            <p><strong>讨论组人数：</strong>{{ group.g_number }}/{{ group.g_total }}</p>
+            <p><strong>讨论组成员：</strong></p>
+            <table class="table table-border table-bordered table-striped mt-20">
+                <thead>
+                    <tr>
+                        <th class="col3">姓名</th>
+                        <th class="col3">学院</th>
+                        <th class="col3">专业</th>
+                        <th class="col3">班级</th>
+                        <th class="col3">年级</th>
+                        <th class="col3">邮箱</th>
+                        <th class="col3">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stu in sTg %}
+                        <tr>
+                            <td class="col3">{{ stu.s_id.s_name }}</td>
+                            <td class="col3">{{ stu.s_id.s_academy.a_name }}</td>
+                            <td class="col3">{{ stu.s_id.s_major.m_name }}</td>
+                            <td class="col3">{{ stu.s_id.s_class }}</td>
+                            <td class="col3">{{ stu.s_id.s_grade }}</td>
+                            <td class="col3">{{ stu.s_id.s_mail }}</td>
+                            {% ifequal me stu.s_id.s_id %}
+                                <td class="col3"></td>
+                            {% else %}
+                                <td class="col3"><a class="btn btn-primary radius" href="/polls/student/sendmsg/?s={{ stu.s_id.s_id }}">发送私信                                </a></td>
+                            {% endifequal %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <a class="btn btn-primary radius" href="/polls/student/sendmsg/?t={{ group.g_teacher.t_id }}">给负责老师发私信</a>
+            <button class="btn btn-primary radius" onclick="window.location.href='/polls/student/mygroup/'">返回</button>
+        </div>
+    </div>
+{% endblock %}
